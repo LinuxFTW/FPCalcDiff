@@ -2,6 +2,7 @@
 #include <bit>
 
 using namespace std;
+
 int xorBitwise(int first, int second){
     return(first ^ second);
 }
@@ -30,10 +31,11 @@ int findMaxComparison(float percentSimilarityList[], int length){
     return(index);
 }
 // Process raw string!
-long int processRawString(string& unprocessed, int length){
-    if(unprocessed.length() < 15){
+long int processRawString(string& unprocessed, int length, int commaCount){
+    if(commaCount == 0){
         return(stol(unprocessed));
     }
+
     string fullNum;
     for(int i=0; i<length; i++){
         char currChar = unprocessed[i];

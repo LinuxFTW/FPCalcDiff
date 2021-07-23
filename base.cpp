@@ -1,29 +1,15 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
-#include "bitwise.h"
+#include "fpcalcparse.h"
 
 #define log1 "fp1.log"
 #define log2 "fp2.log"
 
 using namespace std;
 int main(){
-    fstream iofile;
-    iofile.open(log1);
-
-    int length;
-    string fingerprint;
-    
-    for(string line; getline(iofile, line);)
-    {
-        if(line[0]=='D'){
-            length = stoi(line.substr(9, string::npos));
-        }
-        else if(line[0] == 'F'){
-            fingerprint = line.substr(12, string::npos);
-        }
-    }
-
+    logData logfile1 = parseFile(log1);
+/**
     int byteCount = count(fingerprint.begin(), fingerprint.end(), ',');
     long firstNum;
     long rawFPCalcArrayOne[byteCount]; 
@@ -35,5 +21,10 @@ int main(){
             break;
         }
     }
-    return(0);
+**/
+    long byteArray[logfile1.byteCount];
+    byteSeparation(byteArray, logfile1);
+    for(int i=0; i<logfile1.byteCount; i++){
+        cout << to_string(byteArray[i]) << "\n";
+    }
 }
