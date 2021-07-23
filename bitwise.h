@@ -1,17 +1,9 @@
 #include <iostream>
+#include <bit>
+
 using namespace std;
-
-int compareBitwise(int bits1, int bits2){
-    // Should compare bits1 and bits2 bitwise, to calculate fpcalc similarity
-    // using xor (^) comparison.
-    return(bits1 ^ bits2);
-}
-
-int shiftBitwise(string bits1){
-    // Should return a form of bits1 that removes the first bit and snakes through
-    // the entire sequence sliding everything up by one. There is definitely an
-    // easier way to do this. You would need to create a string with all of the bits,
-    // delete one, and then reparcel all of the bits back together.
+int xorBitwise(int first, int second){
+    return(first ^ second);
 }
 
 float calcPercentSimilarity(int compareArray[], int length){
@@ -19,16 +11,40 @@ float calcPercentSimilarity(int compareArray[], int length){
     int oneCount = 0;
     for(int i=0; i<length; i++){
         int currValue = compareArray[i];
-        // Find way of counting "1"s and ignoring "0"s.
+        oneCount += std::__popcount(currValue);
     }
-    return(oneCount/length);
+    return(oneCount/length*100);
 }
 
-short int findMaxComparison(float percentSimilarityList[]){
-    // Should determine the maximum percent similarity in percentSimilarityList
-    // and return the index of which one ranked the best
-}
+int findMaxComparison(float percentSimilarityList[], int length){
+    float maxValue;
+    int index;
 
-string convertToBinary(int nonBinary){
-    // Should convert a 4 byte integer to a binary string
+    for(int i=0; i<length; i++){
+        float currValue = percentSimilarityList[i];
+        if(maxValue < currValue){
+            maxValue = currValue;
+            index = i;
+        }
+    }
+    return(index);
+}
+// Process raw string!
+long int processRawString(string& unprocessed, int length){
+    if(unprocessed.length() < 15){
+        return(stol(unprocessed));
+    }
+    string fullNum;
+    for(int i=0; i<length; i++){
+        char currChar = unprocessed[i];
+        if(currChar == ','){\
+            unprocessed = unprocessed.substr(i+1, string::npos);
+            return(stol(fullNum));
+        }
+        else
+        {
+            fullNum = fullNum + currChar;
+        } 
+    }
+    return(stol(fullNum));
 }
