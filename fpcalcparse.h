@@ -32,11 +32,14 @@ logData parseFile(string logname){
 void byteSeparation(long arrayPassing[], logData metadata){
     long firstNum;
     for(int i=0; i<metadata.byteCount; i++){
-        int commaCount = count(metadata.fingerprint.begin(), metadata.fingerprint.end(), ",");
+        int commaCount = count(metadata.fingerprint.begin(), metadata.fingerprint.end(), ',');
         firstNum = processRawString(metadata.fingerprint, metadata.fingerprint.length(), commaCount);
         arrayPassing[i] = firstNum;
-        if(metadata.fingerprint.length()<15){
-            break;
-        }
+    }
+}
+
+void compareArrays(long array1[], long array2[], long returnArray[], int arrayLength){
+    for(int i=0; i<arrayLength; i++){
+        returnArray[i] = array1[i] ^ array2[i];
     }
 }

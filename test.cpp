@@ -3,8 +3,8 @@
 
 using namespace std;
 int main(){
-    int a[3] = {1,2,3};
-    int *b = a;
-    cout << b[1];
+    int a = 11953;
+    int b = std::__popcount(a);
+    cout << b;
 
 }

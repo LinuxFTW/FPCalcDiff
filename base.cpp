@@ -9,22 +9,16 @@
 using namespace std;
 int main(){
     logData logfile1 = parseFile(log1);
-/**
-    int byteCount = count(fingerprint.begin(), fingerprint.end(), ',');
-    long firstNum;
-    long rawFPCalcArrayOne[byteCount]; 
-    
-    for(int i=0; i<byteCount; i++){
-        firstNum = processRawString(fingerprint, fingerprint.length());
-        rawFPCalcArrayOne[i] = firstNum;
-        if(fingerprint.length()<15){
-            break;
-        }
-    }
-**/
-    long byteArray[logfile1.byteCount];
-    byteSeparation(byteArray, logfile1);
-    for(int i=0; i<logfile1.byteCount; i++){
-        cout << to_string(byteArray[i]) << "\n";
-    }
+    logData logfile2 = parseFile(log2);
+
+    long logArray1[logfile1.byteCount];
+    long logArray2[logfile2.byteCount];
+
+    byteSeparation(logArray1, logfile1);
+    byteSeparation(logArray2, logfile2);
+
+    long xorArray[logfile1.byteCount];
+    compareArrays(logArray1, logArray2, xorArray, logfile1.byteCount);
+    float percSim = calcPercentSimilarity(xorArray, logfile1.byteCount);
+    cout << percSim << "\n";
 }
