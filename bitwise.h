@@ -14,9 +14,9 @@ float calcPercentSimilarity(long compareArray[], float length){
         oneCount += std::__popcount(currValue);
     }
 
-    // Multiply length by 8 to get a bit count, then divide oneCount by that and multiply
-    // by 100 to get a percentage.
-    float percSim = (oneCount/(length*8))*100;
+    // Multiply length by 4 to get a byte count, then by 8 to get a bit count,
+    // then divide oneCount by that and multiply by 100 to get a percentage.
+    float percSim = (oneCount/(length*8*4))*100;
     return(100-percSim);
 }
 
