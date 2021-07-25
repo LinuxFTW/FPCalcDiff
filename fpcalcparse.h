@@ -42,8 +42,10 @@ logData parseFile(string logname){
     return(data);
 }
 
+// Should separate bytes and should add all bytes to arrayPassing
 void byteSeparation(long arrayPassing[], logData metadata){
     long firstNum;
+    // For every item in the array, process the raw string and pass that number back into arrayPassing. 
     for(int i=0; i<metadata.byteCount; i++){
         int commaCount = count(metadata.fingerprint.begin(), metadata.fingerprint.end(), ',');
         firstNum = processRawString(metadata.fingerprint, metadata.fingerprint.length(), commaCount);
@@ -51,7 +53,10 @@ void byteSeparation(long arrayPassing[], logData metadata){
     }
 }
 
+// Compares the two arrays with an xor function to find mismatching bits
 void compareArrays(long array1[], long array2[], long returnArray[], int arrayLength){
+    // For every term in the array, the return array at that index should be the xored value of
+    // the first two arrays.
     for(int i=0; i<arrayLength; i++){
         returnArray[i] = array1[i] ^ array2[i];
     }
