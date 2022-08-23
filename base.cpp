@@ -2,6 +2,7 @@
 #include <fstream>
 #include <algorithm>
 #include "fpcalcparse.h"
+#include "sync.h"
 
 #define log1 "fp1.log"
 #define log2 "fp2.log"
@@ -24,7 +25,14 @@ int main(){
     long xorArray[logfile1.byteCount];
     compareArrays(logArray1, logArray2, xorArray, logfile1.byteCount);
 
+
     // Determine the percent similarity for the two arrays and print it.
     float percSim = calcPercentSimilarity(xorArray, logfile1.byteCount);
+    cout << percSim << "\n";
+
+    long shiftArray[logfile1.byteCount];
+    shiftArrays(logArray1, shiftArray, logfile1.byteCount);
+    compareArrays(shiftArray, logArray2, xorArray, logfile1.byteCount);
+    percSim = calcPercentSimilarity(xorArray, logfile1.byteCount);
     cout << percSim << "\n";
 }
